@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Baloo+2:wght@400;500;600;700&family=Fraunces:ital,wght@1,800;1,900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  .hero{position:relative;padding:clamp(20px,4vw,40px) 0 30px;overflow:hidden}
+  .hero{position:relative;padding:clamp(20px,4vw,40px) 0 30px}
   .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;position:relative;z-index:2;min-height:560px}
 
   /* pennellate dietro al personaggio (verde + giallo come Figma) */
@@ -17,7 +17,7 @@
   .hero .b-yellow{width:400px;bottom:-60px;left:-140px;transform:rotate(-12deg);opacity:.7;z-index:0}
 
   /* HELLO grande tondo rosa-lilla */
-  .hero .hello{font-family:'Baloo 2',cursive;font-weight:700;
+  .hero .hello{font-family:'Cheesecake','Baloo 2',cursive;font-weight:700;
     font-size:clamp(5rem,15vw,12rem);color:var(--lilac);line-height:.85;margin-bottom:1.4rem;
     position:relative;z-index:2}
 
@@ -33,44 +33,62 @@
     filter:drop-shadow(0 12px 28px rgba(139,108,240,.18));animation:floaty 6s ease-in-out infinite}
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-  /* fascia immagini edge-to-edge */
+  /* fascia titolo sezione */
   .band-title{text-align:center;padding:clamp(30px,4vw,46px) 0 24px;border-top:2px solid var(--line-pink)}
-  .strip-band{border-top:2px solid var(--line-pink);border-bottom:2px solid var(--line-pink);
-    display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:#fff}
-  .strip-band a{position:relative;aspect-ratio:3/4;overflow:hidden;background:#f4f4f4;
-    display:flex;align-items:center;justify-content:center;transition:transform .35s ease}
-  .strip-band a:hover{z-index:2}
-  .strip-band a .ph{font-size:2.4rem;opacity:.6}
-  .strip-band a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-  .strip-band a:hover img{transform:scale(1.08)}
-  .strip-band a .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,.85),transparent 55%);
-    opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-end;padding:14px}
-  .strip-band a:hover .ov{opacity:1}
-  .strip-band a .ov span{color:#fff;font-family:'Baloo 2',cursive;font-weight:600;font-size:.85rem;line-height:1.2}
 
-  /* sketches: base arrotondata ad arco */
+  /* GRAPHICS I MADE: riquadri rettangolari larghi, scroll orizzontale */
+  .strip-band{border-top:2px solid var(--line-pink);border-bottom:2px solid var(--line-pink);
+    display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;background:#fff;scrollbar-width:thin;scrollbar-color:var(--lilac) transparent}
+  .strip-band::-webkit-scrollbar{height:8px}
+  .strip-band::-webkit-scrollbar-track{background:transparent}
+  .strip-band::-webkit-scrollbar-thumb{background:var(--lilac-soft);border-radius:10px}
+  .strip-band::-webkit-scrollbar-thumb:hover{background:var(--lilac)}
+  .strip-band a{position:relative;flex:0 0 auto;width:clamp(260px,26vw,380px);aspect-ratio:3/4;
+    overflow:hidden;background:#f4f4f4;scroll-snap-align:start;transition:transform .35s ease}
+  .strip-band a:hover{z-index:2}
+  .strip-band a .ph{font-size:2.4rem;opacity:.6;display:flex;align-items:center;justify-content:center;height:100%}
+  .strip-band a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .strip-band a:hover img{transform:scale(1.06)}
+  /* etichetta che appare in alto col nome del progetto */
+  .strip-band a .ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,26,26,.85) 0%,rgba(26,26,26,.35) 35%,transparent 70%);
+    opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-start;padding:18px 16px}
+  .strip-band a:hover .ov{opacity:1}
+  .strip-band a .ov span{color:#fff;font-family:'Cheesecake','Bagel Fat One',cursive;font-weight:400;font-size:1.05rem;line-height:1.15;letter-spacing:.02em}
+
+  /* SKETCHES: stessa logica, ma con base arrotondata mantenuta */
   section.sketches{padding:clamp(30px,4vw,46px) 0 30px;background:#fff;position:relative}
-  .sketch-band{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:24px}
-  .sketch-band a{position:relative;aspect-ratio:3/4;overflow:hidden;
-    border-radius:0 0 999px 999px;background:#f4f4f4;
-    display:flex;align-items:center;justify-content:center;transition:transform .35s ease}
+  .sketch-band{display:flex;overflow-x:auto;overflow-y:hidden;gap:16px;scroll-snap-type:x mandatory;
+    padding:14px 4px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--lilac) transparent}
+  .sketch-band::-webkit-scrollbar{height:8px}
+  .sketch-band::-webkit-scrollbar-track{background:transparent}
+  .sketch-band::-webkit-scrollbar-thumb{background:var(--lilac-soft);border-radius:10px}
+  .sketch-band::-webkit-scrollbar-thumb:hover{background:var(--lilac)}
+  .sketch-band a{position:relative;flex:0 0 auto;width:clamp(220px,22vw,320px);aspect-ratio:3/4;
+    overflow:hidden;border-radius:0 0 999px 999px;background:#f4f4f4;
+    scroll-snap-align:start;transition:transform .35s ease}
   .sketch-band a:hover{transform:translateY(-6px)}
-  .sketch-band a .ph{font-size:2rem;opacity:.6}
+  .sketch-band a .ph{font-size:2rem;opacity:.6;display:flex;align-items:center;justify-content:center;height:100%}
   .sketch-band a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .sketch-band a .ov{position:absolute;inset:0;border-radius:0 0 999px 999px;
-    background:linear-gradient(to top,rgba(26,26,26,.8),transparent 55%);
-    opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-end;justify-content:center;padding:0 10px 26px}
+    background:linear-gradient(to bottom,rgba(26,26,26,.85) 0%,rgba(26,26,26,.35) 40%,transparent 75%);
+    opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-start;justify-content:center;padding:20px 12px 0}
   .sketch-band a:hover .ov{opacity:1}
-  .sketch-band a .ov span{color:#fff;font-family:'Baloo 2',cursive;font-weight:600;font-size:.78rem;text-align:center;line-height:1.2}
+  .sketch-band a .ov span{color:#fff;font-family:'Cheesecake','Bagel Fat One',cursive;font-weight:400;font-size:.95rem;text-align:center;line-height:1.15}
 
   .center-cta{text-align:center;margin-top:1.6rem;padding:0 32px}
+
+  /* hint per dire all'utente che si puo scorrere */
+  .scroll-hint{text-align:center;color:var(--ink-soft);font-size:.78rem;
+    text-transform:uppercase;letter-spacing:.15em;margin:.4rem 0 1.2rem;display:flex;
+    align-items:center;justify-content:center;gap:.5rem;opacity:.7}
+  .scroll-hint::before,.scroll-hint::after{content:"";width:30px;height:1px;background:currentColor}
 
   @media(max-width:820px){
     .hero-grid{grid-template-columns:1fr;gap:0;min-height:auto}
     .hero-art{order:-1;min-height:340px}
-    .strip-band,.sketch-band{grid-template-columns:repeat(3,1fr)}
+    .strip-band a{width:240px}.sketch-band a{width:200px}
   }
-  @media(max-width:520px){.strip-band,.sketch-band{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -110,8 +128,9 @@
 <!-- GRAPHICS I MADE -->
 <div class="wrap"><div class="band-title reveal" style="border:0;padding-bottom:0">
   <h2 class="sec-title">Graphics I made <span class="soft">(and still make)</span></h2>
+  <p class="scroll-hint">scorri per vedere tutti i progetti</p>
 </div></div>
-<div class="strip-band reveal" style="margin-top:24px">
+<div class="strip-band reveal" id="stripBand" style="margin-top:12px">
   <a href="works.html#christmas-cookie"><img src="img/works/christmas-cookie.jpg" alt="Christmas Cookie"><div class="ov"><span>Christmas Cookie</span></div></a>
   <a href="works.html#sweet-recipes"><img src="img/works/sweet-recipes.jpg" alt="Sweet Recipes Book"><div class="ov"><span>Sweet Recipes Book</span></div></a>
   <a href="works.html#chocolate"><img src="img/works/chocolate.jpg" alt="Chocolate Bar"><div class="ov"><span>Chocolate Bar</span></div></a>
@@ -125,8 +144,9 @@
   <div class="wrap">
     <div class="band-title reveal" style="border:0">
       <h2 class="sec-title">Sketches I did <span class="soft-pink">for fun/practice</span></h2>
+      <p class="scroll-hint">scorri per vedere tutti gli sketch</p>
     </div>
-    <div class="sketch-band reveal">
+    <div class="sketch-band reveal" id="sketchBand">
       <a href="works.html#illustration-infographic"><div class="ph">&#9999;&#65039;</div><div class="ov"><span>Illustration Infographic</span></div></a>
       <a href="works.html#poem"><img src="img/sketches/poem-alda-merini.jpg" alt="Poem Alda Merini"><div class="ov"><span>Poem — Alda Merini</span></div></a>
       <a href="works.html#room-objects"><img src="img/sketches/room-objects.jpg" alt="Room Objects"><div class="ov"><span>Room Objects</span></div></a>
@@ -166,5 +186,19 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+  // Permette di scorrere orizzontalmente le strip con la rotella del mouse
+  ['stripBand','sketchBand'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('wheel',e=>{
+      // se l'utente sta scrollando verticalmente (rotella), lo converto in orizzontale
+      if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    },{passive:false});
+  });
+</script>
 </body>
 </html>
