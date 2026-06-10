@@ -9,16 +9,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Baloo+2:wght@400;500;600;700&family=Fraunces:ital,wght@1,800;1,900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  .hero{position:relative;padding:clamp(20px,4vw,40px) 0 30px}
-  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;position:relative;z-index:2;min-height:560px}
+  .hero{position:relative;padding:clamp(20px,4vw,40px) 0 30px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;position:relative;z-index:2;min-height:520px}
 
   /* pennellate dietro al personaggio (verde + giallo come Figma) */
-  .hero .b-green{width:700px;top:-30px;right:-40px;transform:rotate(8deg);opacity:.85;z-index:0}
-  .hero .b-yellow{width:400px;bottom:-60px;left:-140px;transform:rotate(-12deg);opacity:.7;z-index:0}
+  .hero .b-green{width:680px;top:-20px;right:-30px;transform:rotate(8deg);opacity:.85;z-index:0}
+  .hero .b-yellow{width:380px;bottom:-40px;left:-130px;transform:rotate(-12deg);opacity:.7;z-index:0}
+  .hero .b-pink{width:200px;top:40%;left:-90px;transform:rotate(20deg);opacity:.45;z-index:0}
 
   /* HELLO grande tondo rosa-lilla */
-  .hero .hello{font-family:'Cheesecake','Baloo 2',cursive;font-weight:700;
-    font-size:clamp(5rem,15vw,12rem);color:var(--lilac);line-height:.85;margin-bottom:1.4rem;
+  .hero .hello{font-family:'Bagel Fat One',cursive;font-weight:400;
+    font-size:clamp(5rem,14vw,11rem);color:var(--lilac);line-height:.85;margin-bottom:1.4rem;
     position:relative;z-index:2}
 
   /* lineetta + testo */
@@ -27,68 +28,54 @@
   .hero .liner p.lead{font-size:1rem;color:var(--ink);max-width:34ch;line-height:1.7}
   .hero .cta{margin-top:1.6rem;position:relative;z-index:2}
 
-  /* personaggio illustrato vero */
-  .hero-art{position:relative;display:flex;justify-content:center;align-items:center;min-height:480px}
-  .hero-art .char-img{position:relative;z-index:3;max-width:100%;max-height:580px;width:auto;
-    filter:drop-shadow(0 12px 28px rgba(139,108,240,.18));animation:floaty 6s ease-in-out infinite}
-  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  /* personaggio (illustrazione che caricherai poi) */
+  .hero-art{position:relative;display:flex;justify-content:center;align-items:center;min-height:420px}
+  .hero-art .char-placeholder{position:relative;z-index:3;font-size:clamp(13rem,28vw,22rem);line-height:1;
+    filter:drop-shadow(0 12px 28px rgba(139,108,240,.22));animation:floaty 6s ease-in-out infinite}
+  .hero-art .char-img{position:relative;z-index:3;max-width:100%;max-height:520px;width:auto;
+    filter:drop-shadow(0 12px 28px rgba(139,108,240,.22));animation:floaty 6s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
-  /* fascia titolo sezione */
+  /* fascia titolo sezione + linee rosa sopra/sotto */
   .band-title{text-align:center;padding:clamp(30px,4vw,46px) 0 24px;border-top:2px solid var(--line-pink)}
-
-  /* GRAPHICS I MADE: riquadri rettangolari larghi, scroll orizzontale */
   .strip-band{border-top:2px solid var(--line-pink);border-bottom:2px solid var(--line-pink);
-    display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;background:#fff;scrollbar-width:thin;scrollbar-color:var(--lilac) transparent}
-  .strip-band::-webkit-scrollbar{height:8px}
-  .strip-band::-webkit-scrollbar-track{background:transparent}
-  .strip-band::-webkit-scrollbar-thumb{background:var(--lilac-soft);border-radius:10px}
-  .strip-band::-webkit-scrollbar-thumb:hover{background:var(--lilac)}
-  .strip-band a{position:relative;flex:0 0 auto;width:clamp(260px,26vw,380px);aspect-ratio:3/4;
-    overflow:hidden;background:#f4f4f4;scroll-snap-align:start;transition:transform .35s ease}
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:#fff}
+  .strip-band a{position:relative;aspect-ratio:3/4;overflow:hidden;background:#f4f4f4;
+    display:flex;align-items:center;justify-content:center;transition:transform .35s ease}
   .strip-band a:hover{z-index:2}
-  .strip-band a .ph{font-size:2.4rem;opacity:.6;display:flex;align-items:center;justify-content:center;height:100%}
+  .strip-band a .ph{font-size:2.4rem;opacity:.6}
   .strip-band a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-  .strip-band a:hover img{transform:scale(1.06)}
-  /* etichetta che appare in alto col nome del progetto */
-  .strip-band a .ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,26,26,.85) 0%,rgba(26,26,26,.35) 35%,transparent 70%);
-    opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-start;padding:18px 16px}
+  .strip-band a:hover img{transform:scale(1.08)}
+  .strip-band a .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,.85),transparent 55%);
+    opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-end;padding:14px}
   .strip-band a:hover .ov{opacity:1}
-  .strip-band a .ov span{color:#fff;font-family:'Cheesecake','Bagel Fat One',cursive;font-weight:400;font-size:1.05rem;line-height:1.15;letter-spacing:.02em}
+  .strip-band a .ov span{color:#fff;font-family:'Baloo 2',cursive;font-weight:600;font-size:.85rem;line-height:1.2}
 
-  /* SKETCHES: stessa logica, ma con base arrotondata mantenuta */
+  /* sketches: stesso stile di graphics band */
   section.sketches{padding:clamp(30px,4vw,46px) 0 30px;background:#fff;position:relative}
-  .sketch-band{display:flex;overflow-x:auto;overflow-y:hidden;gap:16px;scroll-snap-type:x mandatory;
-    padding:14px 4px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--lilac) transparent}
-  .sketch-band::-webkit-scrollbar{height:8px}
-  .sketch-band::-webkit-scrollbar-track{background:transparent}
-  .sketch-band::-webkit-scrollbar-thumb{background:var(--lilac-soft);border-radius:10px}
-  .sketch-band::-webkit-scrollbar-thumb:hover{background:var(--lilac)}
-  .sketch-band a{position:relative;flex:0 0 auto;width:clamp(220px,22vw,320px);aspect-ratio:3/4;
-    overflow:hidden;border-radius:0 0 999px 999px;background:#f4f4f4;
-    scroll-snap-align:start;transition:transform .35s ease}
-  .sketch-band a:hover{transform:translateY(-6px)}
-  .sketch-band a .ph{font-size:2rem;opacity:.6;display:flex;align-items:center;justify-content:center;height:100%}
-  .sketch-band a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .sketch-band a .ov{position:absolute;inset:0;border-radius:0 0 999px 999px;
-    background:linear-gradient(to bottom,rgba(26,26,26,.85) 0%,rgba(26,26,26,.35) 40%,transparent 75%);
-    opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-start;justify-content:center;padding:20px 12px 0}
+  .sketch-band{display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+    border-top:2px solid var(--line-pink);border-bottom:2px solid var(--line-pink);background:#fff;
+    margin-top:24px}
+  .sketch-band a{position:relative;aspect-ratio:3/4;overflow:hidden;background:#f4f4f4;
+    display:flex;align-items:center;justify-content:center;transition:transform .35s ease}
+  .sketch-band a:hover{z-index:2}
+  .sketch-band a .ph{font-size:2rem;opacity:.6}
+  .sketch-band a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .sketch-band a:hover img{transform:scale(1.08)}
+  .sketch-band a .ov{position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(26,26,26,.85),transparent 55%);
+    opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-end;padding:14px}
   .sketch-band a:hover .ov{opacity:1}
-  .sketch-band a .ov span{color:#fff;font-family:'Cheesecake','Bagel Fat One',cursive;font-weight:400;font-size:.95rem;text-align:center;line-height:1.15}
+  .sketch-band a .ov span{color:#fff;font-family:'Baloo 2',cursive;font-weight:600;font-size:.85rem;line-height:1.2}
 
   .center-cta{text-align:center;margin-top:1.6rem;padding:0 32px}
 
-  /* hint per dire all'utente che si puo scorrere */
-  .scroll-hint{text-align:center;color:var(--ink-soft);font-size:.78rem;
-    text-transform:uppercase;letter-spacing:.15em;margin:.4rem 0 1.2rem;display:flex;
-    align-items:center;justify-content:center;gap:.5rem;opacity:.7}
-  .scroll-hint::before,.scroll-hint::after{content:"";width:30px;height:1px;background:currentColor}
-
   @media(max-width:820px){
     .hero-grid{grid-template-columns:1fr;gap:0;min-height:auto}
-    .hero-art{order:-1;min-height:340px}
-    .strip-band a{width:240px}.sketch-band a{width:200px}
+    .hero-art{order:-1;min-height:280px}
+    .strip-band,.sketch-band{grid-template-columns:repeat(3,1fr)}
   }
+  @media(max-width:520px){.strip-band,.sketch-band{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -107,6 +94,7 @@
 
 <main>
 <header class="hero">
+  <img src="img/brush/brush-pink-21.png" class="brush b-pink" alt="">
   <img src="img/brush/brush-mint-20.png" class="brush b-green" alt="">
   <img src="img/brush/brush-pinkcream-orig.png" class="brush b-yellow" alt="">
 
@@ -120,7 +108,7 @@
       <div class="cta"><a href="works.html" class="btn btn-primary">Let's start!</a></div>
     </div>
     <div class="hero-art reveal">
-      <img src="img/personaggio.png" class="char-img" alt="Isabella illustrata">
+      <img src="img/isabella.jpg" class="char-img" alt="Isabella">
     </div>
   </div>
 </header>
@@ -128,10 +116,9 @@
 <!-- GRAPHICS I MADE -->
 <div class="wrap"><div class="band-title reveal" style="border:0;padding-bottom:0">
   <h2 class="sec-title">Graphics I made <span class="soft">(and still make)</span></h2>
-  <p class="scroll-hint">scorri per vedere tutti i progetti</p>
 </div></div>
-<div class="strip-band reveal" id="stripBand" style="margin-top:12px">
-  <a href="works.html#christmas-cookie"><img src="img/works/christmas-cookie.jpg" alt="Christmas Cookie"><div class="ov"><span>Christmas Cookie</span></div></a>
+<div class="strip-band reveal" style="margin-top:24px">
+  <a href="works.html#christmas-cookie"><div class="ph">&#127850;</div><div class="ov"><span>Christmas Cookie</span></div></a>
   <a href="works.html#sweet-recipes"><img src="img/works/sweet-recipes.jpg" alt="Sweet Recipes Book"><div class="ov"><span>Sweet Recipes Book</span></div></a>
   <a href="works.html#chocolate"><img src="img/works/chocolate.jpg" alt="Chocolate Bar"><div class="ov"><span>Chocolate Bar</span></div></a>
   <a href="works.html#morro-alba"><img src="img/works/morro-alba.jpg" alt="Tear of Morro d'Alba"><div class="ov"><span>Tear of Morro d'Alba</span></div></a>
@@ -141,64 +128,30 @@
 
 <!-- SKETCHES -->
 <section class="sketches">
-  <div class="wrap">
-    <div class="band-title reveal" style="border:0">
-      <h2 class="sec-title">Sketches I did <span class="soft-pink">for fun/practice</span></h2>
-      <p class="scroll-hint">scorri per vedere tutti gli sketch</p>
-    </div>
-    <div class="sketch-band reveal" id="sketchBand">
-      <a href="works.html#illustration-infographic"><div class="ph">&#9999;&#65039;</div><div class="ov"><span>Illustration Infographic</span></div></a>
-      <a href="works.html#poem"><img src="img/sketches/poem-alda-merini.jpg" alt="Poem Alda Merini"><div class="ov"><span>Poem — Alda Merini</span></div></a>
-      <a href="works.html#room-objects"><img src="img/sketches/room-objects.jpg" alt="Room Objects"><div class="ov"><span>Room Objects</span></div></a>
-      <a href="works.html#urban-eco"><img src="img/sketches/urban-eco.jpg" alt="Urban Eco x Eastpak"><div class="ov"><span>Urban Eco x Eastpak</span></div></a>
-      <a href="works.html#sketch-friend"><img src="img/sketches/sketch-friend.jpg" alt="Sketch for a Friend"><div class="ov"><span>Sketch for a Friend</span></div></a>
-    </div>
+  <div class="wrap"><div class="band-title reveal" style="border:0;padding-bottom:0">
+    <h2 class="sec-title">Sketches I did <span class="soft">(for fun/practice)</span></h2>
+  </div></div>
+  <div class="sketch-band reveal" style="margin-top:24px">
+    <a href="works.html#illustration-infographic"><div class="ph">&#9999;&#65039;</div><div class="ov"><span>Illustration Infographic</span></div></a>
+    <a href="works.html#poem"><img src="img/sketches/poem-alda-merini.jpg" alt="Poem Alda Merini"><div class="ov"><span>Poem — Alda Merini</span></div></a>
+    <a href="works.html#room-objects"><img src="img/sketches/room-objects.jpg" alt="Room Objects"><div class="ov"><span>Room Objects</span></div></a>
+    <a href="works.html#urban-eco"><div class="ph">&#127890;</div><div class="ov"><span>Urban Eco x Eastpak</span></div></a>
+    <a href="works.html#sketch-friend"><img src="img/sketches/sketch-friend.jpg" alt="Sketch for a Friend"><div class="ov"><span>Sketch for a Friend</span></div></a>
   </div>
 </section>
 </main>
 
-<!-- FOOTER stile Flaunter, ma bianco -->
-<footer class="footer-main">
+<footer>
   <div class="wrap">
-    <a href="index.html" class="footer-logo">Simply<small>design</small></a>
-    <nav class="footer-nav">
+    <div class="foot-links">
       <a href="about.html">About me</a>
       <a href="works.html">Works</a>
       <a href="contacts.html">Contacts</a>
-    </nav>
-    <div class="footer-socials">
-      <a href="https://instagram.com/simply_design" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      </a>
-      <a href="mailto:simply.design@gmail.com" aria-label="Email">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <a href="https://www.behance.net/" target="_blank" rel="noopener" aria-label="Behance">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.938 4.503c.702 0 1.34.06 1.92.188.577.13 1.07.33 1.485.61.41.28.733.65.96 1.12.225.47.34 1.05.34 1.73 0 .74-.17 1.36-.507 1.86-.338.5-.837.9-1.502 1.21.906.26 1.576.72 2.022 1.37.448.66.667 1.45.667 2.36 0 .75-.13 1.39-.41 1.93-.28.55-.67 1-1.16 1.35-.48.348-1.05.61-1.67.78-.61.17-1.26.27-1.92.27H0V4.51h6.938v-.007zM3.495 8.78h2.985c.578 0 1.06-.14 1.444-.42.388-.28.582-.7.582-1.27 0-.32-.05-.578-.16-.78-.115-.2-.27-.37-.46-.49-.196-.124-.42-.21-.683-.26-.255-.06-.51-.08-.79-.08H3.5v3.3h-.005zm0 6.85h3.42c.282 0 .55-.04.812-.09.265-.06.50-.16.71-.31.205-.14.367-.34.49-.6.124-.246.18-.566.18-.96 0-.778-.221-1.33-.66-1.668-.435-.336-1.024-.504-1.745-.504H3.5v4.13h-.005zM18.717 15.04c.473.46 1.156.692 2.04.692.638 0 1.187-.16 1.65-.475.464-.32.748-.654.85-1.005h2.612c-.42 1.298-1.06 2.225-1.93 2.785-.85.55-1.92.832-3.166.832-.87 0-1.66-.137-2.36-.41-.706-.275-1.302-.668-1.793-1.18-.494-.51-.872-1.116-1.144-1.823-.27-.71-.405-1.488-.405-2.343 0-.83.14-1.6.42-2.31.276-.71.67-1.317 1.175-1.834.51-.514 1.115-.92 1.812-1.218.7-.297 1.473-.444 2.32-.444.946 0 1.77.183 2.474.55.703.366 1.278.857 1.732 1.475.45.62.778 1.323.978 2.105.196.79.26 1.617.196 2.478H17.45c0 .883.297 1.71.764 2.16l.504-.045-.001-.105zM7.6 6.5h7.2v1.7H7.6V6.5z"/></svg>
-      </a>
     </div>
-    <div class="footer-divider"></div>
-    <p class="footer-copy">&copy; 2026 Isabella Penazzi &middot; Simply Design</p>
+    <p class="small">&copy; 2026 Isabella Penazzi &middot; Simply Design</p>
   </div>
 </footer>
 
 <script src="main.js"></script>
-<script>
-  // Permette di scorrere orizzontalmente le strip con la rotella del mouse
-  ['stripBand','sketchBand'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(!el) return;
-    el.addEventListener('wheel',e=>{
-      // se l'utente sta scrollando verticalmente (rotella), lo converto in orizzontale
-      if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){
-        e.preventDefault();
-        el.scrollLeft += e.deltaY;
-      }
-    },{passive:false});
-  });
-</script>
 </body>
 </html>
