@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simply Design – Isabella Penazzi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Pacifico&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:   #F48FB1;
+      --yellow: #F9E4A0;
+      --mint:   #A8E6CF;
+      --purple: #B39DDB;
+      --black:  #1a1a1a;
+      --white:  #ffffff;
+      --grey:   #f5f5f5;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--black);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .logo span {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--pink); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 2rem 3rem 3rem;
+    }
+
+    /* brush blobs */
+    .blob {
+      position: absolute;
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      opacity: 0.55;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .blob-yellow {
+      width: 420px; height: 380px;
+      background: var(--yellow);
+      top: -60px; left: -80px;
+      border-radius: 45% 55% 60% 40% / 55% 45% 65% 35%;
+      transform: rotate(-15deg);
+    }
+    .blob-mint {
+      width: 480px; height: 440px;
+      background: var(--mint);
+      top: -80px; right: 120px;
+      border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
+      transform: rotate(10deg);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 480px;
+    }
+
+    .hero-hello {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(5rem, 12vw, 9rem);
+      color: var(--pink);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #333;
+      max-width: 360px;
+      margin-bottom: 2rem;
+    }
+
+    .btn-start {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border: 2.5px solid var(--purple);
+      border-radius: 50px;
+      color: var(--black);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-start:hover {
+      background: var(--purple);
+      color: var(--white);
+    }
+
+    .hero-illustration {
+      position: absolute;
+      right: 5%;
+      bottom: 0;
+      z-index: 2;
+      width: clamp(280px, 42%, 520px);
+      /* placeholder for the illustration image */
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .hero-illustration img {
+      width: 100%;
+      object-fit: contain;
+    }
+    /* placeholder box shown until image is added */
+    .hero-illustration .placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #e8d5f0 0%, #d4f0e8 100%);
+      border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      text-align: center;
+      padding: 3.5rem 2rem 1.5rem;
+    }
+    .section-title h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .section-title h2 span {
+      color: var(--purple);
+      font-weight: 900;
+    }
+    .section-title.mint-accent h2 span {
+      color: var(--mint);
+      -webkit-text-stroke: 1.5px #6abf9e;
+    }
+
+    /* ── GALLERY STRIPS ── */
+    .gallery-strip {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1rem 3rem 3rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .gallery-strip::-webkit-scrollbar { display: none; }
+
+    .gallery-item {
+      flex: 0 0 220px;
+      height: 220px;
+      border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+      overflow: hidden;
+      background: #e0e0e0;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    /* placeholder colori per quando non ci sono immagini */
+    .gallery-item:nth-child(1) { background: #fce4ec; }
+    .gallery-item:nth-child(2) { background: #fff8e1; }
+    .gallery-item:nth-child(3) { background: #e8f5e9; }
+    .gallery-item:nth-child(4) { background: #ede7f6; }
+    .gallery-item:nth-child(5) { background: #e3f2fd; }
+
+    .gallery-item .ph-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1.5px solid #e0e0e0;
+      margin: 0 3rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      color: var(--black);
+      padding: 2.5rem 3rem 2rem;
+      border-top: 1.5px solid var(--black);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--black);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .footer-top a {
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-top a:hover { color: var(--pink); }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.4rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--black);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .social-icon:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.2rem;
+      font-size: 0.75rem;
+      color: #555;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 1.5rem 1.5rem 0; min-height: auto; flex-direction: column; }
+      .hero-illustration { position: relative; right: auto; bottom: auto; width: 80%; margin: 2rem auto 0; }
+      .gallery-strip { padding: 1rem 1.5rem 2rem; }
+      .section-title { padding: 2.5rem 1.5rem 1rem; }
+      .divider { margin: 0 1.5rem; }
+      footer { padding: 2rem 1.5rem 1.5rem; }
+      .footer-top { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Simply<span>Design</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#contacts">Contacts</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="blob blob-yellow"></div>
+    <div class="blob blob-mint"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-hello">Hello!</h1>
+      <p class="hero-text">
+        I'm Isabella and here I will show you how I turn thoughts, emotions,
+        and strange inspirations into digital illustrations.
+      </p>
+      <a href="#works" class="btn-start">Let's Start!</a>
+    </div>
+
+    <div class="hero-illustration">
+      <!--
+        Sostituisci il div.placeholder con:
+        <img src="illustration.png" alt="Isabella illustration" />
+      -->
+      <div class="placeholder">La tua illustrazione<br/>va qui<br/><small>(aggiungi illustration.png)</small></div>
+    </div>
+  </section>
+
+  <!-- GRAPHICS SECTION -->
+  <div class="section-title" id="works">
+    <h2>Graphics I Made <span>(and still make)</span></h2>
+  </div>
+
+  <div class="gallery-strip">
+    <!-- Sostituisci i div.ph-label con <img src="tuaimmagine.jpg" alt="..."> dentro ogni gallery-item -->
+    <div class="gallery-item"><div class="ph-label">Immagine 1</div></div>
+    <div class="gallery-item"><div class="ph-label">Immagine 2</div></div>
+    <div class="gallery-item"><div class="ph-label">Immagine 3</div></div>
+    <div class="gallery-item"><div class="ph-label">Immagine 4</div></div>
+    <div class="gallery-item"><div class="ph-label">Immagine 5</div></div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- SKETCHES SECTION -->
+  <div class="section-title">
+    <h2>Sketches I Did <span style="color:#a8e6cf; -webkit-text-stroke: 1.5px #6abf9e;">For Fun/Practice</span></h2>
+  </div>
+
+  <div class="gallery-strip">
+    <div class="gallery-item"><div class="ph-label">Sketch 1</div></div>
+    <div class="gallery-item"><div class="ph-label">Sketch 2</div></div>
+    <div class="gallery-item"><div class="ph-label">Sketch 3</div></div>
+    <div class="gallery-item"><div class="ph-label">Sketch 4</div></div>
+    <div class="gallery-item"><div class="ph-label">Sketch 5</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contacts">
+    <div class="footer-top">
+      <a href="#about">About Me</a>
+      <a href="#works">Works</a>
+      <a href="#contacts">Contacts</a>
+    </div>
+
+    <div class="footer-socials">
+
+      <!-- Instagram -->
+      <a href="#" class="social-icon" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+
+      <!-- Mail -->
+      <a href="#" class="social-icon" aria-label="Email">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/feed/" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+
+      <!-- Behance -->
+      <a href="#" class="social-icon" aria-label="Behance">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.7zm-7.shutterstock729-3.31h3.578c-.123-.823-.546-1.541-1.736-1.541-1.135 0-1.683.694-1.842 1.541zm-6.326 1.998c0 2.117-1.558 3.31-3.786 3.31H2V5h4.39c2.021 0 3.434 1.024 3.434 2.912 0 1.072-.476 1.901-1.335 2.406.962.391 1.707 1.316 1.707 2.37zm-5.9-5.236v1.967H6.7c.781 0 1.273-.391 1.273-1.009 0-.616-.492-.958-1.273-.958H3.771zm3.343 4.453c0-.714-.57-1.087-1.408-1.087H3.771v2.174H5.706c.838 0 1.408-.388 1.408-1.087z"/>
+        </svg>
+      </a>
+
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2025 Isabella Penazzi – Simply Design. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
